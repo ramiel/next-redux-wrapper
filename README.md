@@ -80,11 +80,7 @@ configuration properties:
 - `connectOptions` (optional, object) : configuration to pass to `react-redux` `connect` method
 
 
-When `makeStore` is invoked it is also provided a configuration object as the second parameter, which includes:
-
-- `isServer` (boolean): `true` if called while on the server rather than the client
-- `req` (Request): The `next.js` `getInitialProps` context `req` parameter
-- `query` (object): The `next.js` `getInitialProps` context `query` parameter
+When `makeStore` is invoked it is also provided a configuration object as the second parameter, which includes all the properties passed to `getInitialProps` by next.js. To have a list please refer to the [official documentation](https://github.com/zeit/next.js/#fetching-data-and-component-lifecycle)
 
 The object also includes all configuration as passed to `withRedux` if called with an object of configuration properties.
 

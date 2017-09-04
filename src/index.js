@@ -15,11 +15,14 @@ function initStore(makeStore, initialState, context, config) {
     var isServer = !!req && !isBrowser;
     var storeKey = config.storeKey;
 
-    var options = Object.assign({}, config, {
-        isServer: isServer,
-        req: req,
-        query: context.query
-    });
+    var options = Object.assign(
+        {}, 
+        config, 
+        {
+            isServer: isServer
+        },
+        context
+    );
 
     // Always make a new store if server
     if (isServer) {
@@ -123,7 +126,7 @@ module.exports = function(createStore) {
                 if (config.debug) console.log(Cmp.name, '- 1. WrappedCmp.getInitialProps wrapper', (ctx.req && ctx.req._store ? 'takes the req store' : 'creates the store'));
 
                 ctx.isServer = !!ctx.req;
-                ctx.store = initStore(createStore, undefined /** initialState **/, {req: ctx.req, query: ctx.query}, config);
+                ctx.store = initStore(createStore, undefined /** initialState **/, ctx, config);
 
                 res(_Promise.all([
                     ctx.isServer,
